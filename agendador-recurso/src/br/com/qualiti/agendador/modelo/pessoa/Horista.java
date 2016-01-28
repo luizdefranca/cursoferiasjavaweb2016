@@ -2,10 +2,13 @@ package br.com.qualiti.agendador.modelo.pessoa;
 
 import java.time.LocalDate;
 
+import br.com.qualiti.agendador.modelo.agenda.Agenda;
+
 public class Horista extends Colaborador {
 
 	private double valorHora;
 	//DISPONIBILIDADE
+	private Agenda agenda;
 
 	@Override
 	double calculaPagamentoPeriodo(LocalDate dataInicial, LocalDate dataFinal) {
@@ -25,6 +28,14 @@ public class Horista extends Colaborador {
 
 	public void setValorHora(double valorHora) {
 		this.valorHora = valorHora;
+	}
+
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
 	}
 
 }

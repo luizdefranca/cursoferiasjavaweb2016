@@ -23,4 +23,13 @@ public class Professor extends Horista {
 	public void setTurmas(List<Turma> turmas) {
 		this.turmas = turmas;
 	}
+
+	public boolean isDisponivel(LocalDate inicio,
+							 LocalDate fim,
+							 String turno,
+							 String... diasSemana) {
+
+
+		return true;
+	}
 }
