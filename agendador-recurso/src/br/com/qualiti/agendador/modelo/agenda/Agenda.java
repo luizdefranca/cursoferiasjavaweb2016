@@ -5,28 +5,31 @@ import java.util.List;
 
 public class Agenda {
 
-	private List<Dia> dias;
+	List<HorarioAgenda> horarios;
 
 	public Agenda() {
-		dias = new ArrayList<>();
+		horarios = new ArrayList<>();
 	}
 
-	public List<Dia> getDias() {
-		return dias;
+
+	public void habilitaTurnoManha(DiaSemanaEnum diaSemana){
+		HorarioAgenda horarioAgenda =
+			new HorarioAgenda(diaSemana, TurnoEnum.MANHA);
+
+		horarios.add(horarioAgenda);
 	}
 
-	public void setDias(List<Dia> dias) {
-		this.dias = dias;
+	public void habilitaTurnoTarde(DiaSemanaEnum diaSemana){
+		HorarioAgenda horarioAgenda =
+				new HorarioAgenda(diaSemana, TurnoEnum.TARDE);
+
+			horarios.add(horarioAgenda);
 	}
 
-	public void adicionaDiaTurno(String nomeDia, String nomeTurno) {
+	public void habilitaTurnoNoite(DiaSemanaEnum diaSemana){
+		HorarioAgenda horarioAgenda =
+				new HorarioAgenda(diaSemana, TurnoEnum.NOITE);
 
-		Dia dia = new Dia();
-		dia.setNome(nomeDia);
-
-		dia.adicionaTurno(nomeTurno);
-
-		dias.add(dia);
-
+			horarios.add(horarioAgenda);
 	}
 }

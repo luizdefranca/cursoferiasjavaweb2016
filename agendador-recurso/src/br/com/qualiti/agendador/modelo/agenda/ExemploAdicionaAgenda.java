@@ -1,6 +1,7 @@
 package br.com.qualiti.agendador.modelo.agenda;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import br.com.qualiti.agendador.modelo.pessoa.Professor;
 
@@ -12,26 +13,35 @@ public class ExemploAdicionaAgenda {
 
 		Agenda agenda = new Agenda();
 
-		agenda.adicionaDiaTurno(AgendaConstantes.SEGUNDA, AgendaConstantes.NOITE);
-		agenda.adicionaDiaTurno(AgendaConstantes.TERCA, AgendaConstantes.NOITE);
-		agenda.adicionaDiaTurno(AgendaConstantes.QUARTA, AgendaConstantes.NOITE);
-		agenda.adicionaDiaTurno(AgendaConstantes.QUINTA, AgendaConstantes.NOITE);
-		agenda.adicionaDiaTurno(AgendaConstantes.SEXTA, AgendaConstantes.NOITE);
-		agenda.adicionaDiaTurno(AgendaConstantes.SABADO, AgendaConstantes.MANHA);
-		agenda.adicionaDiaTurno(AgendaConstantes.SABADO, AgendaConstantes.TARDE);
+		agenda.habilitaTurnoNoite(DiaSemanaEnum.SEGUNDA);
+		agenda.habilitaTurnoNoite(DiaSemanaEnum.TERCA);
+		agenda.habilitaTurnoNoite(DiaSemanaEnum.QUARTA);
+		agenda.habilitaTurnoNoite(DiaSemanaEnum.QUINTA);
+		agenda.habilitaTurnoNoite(DiaSemanaEnum.SEXTA);
+		agenda.habilitaTurnoManha(DiaSemanaEnum.SABADO);
+		agenda.habilitaTurnoTarde(DiaSemanaEnum.SABADO);
 
 		LocalDate inicio = LocalDate.of(2016, 3, 10);
 		LocalDate fim = LocalDate.of(2016, 4, 10);
 
-		professor.isDisponivel(
-			inicio,
-			fim,
-			AgendaConstantes.NOITE,
-			AgendaConstantes.SEGUNDA,
-			AgendaConstantes.QUARTA,
-			AgendaConstantes.SEXTA);
+		professor.isDisponivel(curso);
 
 		professor.setAgenda(agenda);
+
+		//===========================
+
+		DiaSemanaEnum[] values = DiaSemanaEnum.values();
+
+		for (DiaSemanaEnum dia : values) {
+			System.out.println(dia.ordinal() + " - " + dia.getLocalizedName(Locale.ENGLISH));
+		}
+
+		System.out.println("\n\n\n");
+		for (DiaSemanaEnum dia : values) {
+			System.out.println(dia.ordinal() + " - " + dia.getLocalizedName(Locale.FRANCE));
+		}
+
+
 	}
 
 }
