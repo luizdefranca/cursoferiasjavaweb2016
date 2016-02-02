@@ -3,14 +3,26 @@ package br.com.qualiti.agendador.modelo.agenda;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Agenda {
+public class AgendaSemanalTurnos {
 
 	List<HorarioAgenda> horarios;
 
-	public Agenda() {
+	public AgendaSemanalTurnos() {
 		horarios = new ArrayList<>();
 	}
 
+
+	public boolean isCompativel(AgendaSemanalTurnos outraAgenda){
+
+		boolean compativeis = false;
+
+		List<HorarioAgenda> outrosHorarios = outraAgenda.horarios;
+		if(outrosHorarios.containsAll(horarios)){
+			compativeis = true;
+		}
+
+		return compativeis;
+	}
 
 	public void habilitaTurnoManha(DiaSemanaEnum diaSemana){
 		HorarioAgenda horarioAgenda =
@@ -31,5 +43,15 @@ public class Agenda {
 				new HorarioAgenda(diaSemana, TurnoEnum.NOITE);
 
 			horarios.add(horarioAgenda);
+	}
+
+
+	public List<HorarioAgenda> getHorarios() {
+		return horarios;
+	}
+
+
+	public void setHorarios(List<HorarioAgenda> horarios) {
+		this.horarios = horarios;
 	}
 }

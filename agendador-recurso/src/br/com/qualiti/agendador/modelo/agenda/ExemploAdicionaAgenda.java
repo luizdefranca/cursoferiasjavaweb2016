@@ -11,22 +11,22 @@ public class ExemploAdicionaAgenda {
 
 		Professor professor = new Professor();
 
-		Agenda agenda = new Agenda();
+		AgendaSemanalTurnos agendaSemanalTurnos = new AgendaSemanalTurnos();
 
-		agenda.habilitaTurnoNoite(DiaSemanaEnum.SEGUNDA);
-		agenda.habilitaTurnoNoite(DiaSemanaEnum.TERCA);
-		agenda.habilitaTurnoNoite(DiaSemanaEnum.QUARTA);
-		agenda.habilitaTurnoNoite(DiaSemanaEnum.QUINTA);
-		agenda.habilitaTurnoNoite(DiaSemanaEnum.SEXTA);
-		agenda.habilitaTurnoManha(DiaSemanaEnum.SABADO);
-		agenda.habilitaTurnoTarde(DiaSemanaEnum.SABADO);
+		agendaSemanalTurnos.habilitaTurnoNoite(DiaSemanaEnum.SEGUNDA);
+		agendaSemanalTurnos.habilitaTurnoNoite(DiaSemanaEnum.TERCA);
+		agendaSemanalTurnos.habilitaTurnoNoite(DiaSemanaEnum.QUARTA);
+		agendaSemanalTurnos.habilitaTurnoNoite(DiaSemanaEnum.QUINTA);
+		agendaSemanalTurnos.habilitaTurnoNoite(DiaSemanaEnum.SEXTA);
+		agendaSemanalTurnos.habilitaTurnoManha(DiaSemanaEnum.SABADO);
+		agendaSemanalTurnos.habilitaTurnoTarde(DiaSemanaEnum.SABADO);
 
 		LocalDate inicio = LocalDate.of(2016, 3, 10);
 		LocalDate fim = LocalDate.of(2016, 4, 10);
 
 		professor.isDisponivel(curso);
 
-		professor.setAgenda(agenda);
+		professor.setAgenda(agendaSemanalTurnos);
 
 		//===========================
 
