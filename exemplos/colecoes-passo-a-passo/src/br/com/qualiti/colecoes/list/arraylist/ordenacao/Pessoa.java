@@ -30,6 +30,8 @@ public class Pessoa implements Comparable<Pessoa> {
 		this.dataNascimento = dataNascimento;
 	}
 
+
+
 	@Override
 	public int compareTo(Pessoa outra) {
 
@@ -48,5 +50,23 @@ public class Pessoa implements Comparable<Pessoa> {
 	@Override
 	public String toString() {
 		return getNome() + "/"+getDataNascimento();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if((obj instanceof Pessoa) == false){
+			return false;
+		}
+
+		Pessoa outra = (Pessoa)obj;
+
+		boolean nomeIgual = nome.equals(outra.nome);
+		boolean dataNascimentoIgual = dataNascimento.equals(outra.dataNascimento);
+
+		return nomeIgual && dataNascimentoIgual;
+
+//		return nome.equals(outra.nome) &&
+//			dataNascimento.equals(outra.dataNascimento);
 	}
 }
