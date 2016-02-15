@@ -13,7 +13,9 @@ public class Outros {
 
 		//compareTwoArrayList();
 
-		overrideToStringMethodArrayList();
+		//overrideToStringMethodArrayList();
+
+		trimTheSizeOfArrayList();
 	}
 
 	public static void compareTwoArrayList() {
@@ -106,7 +108,32 @@ public class Outros {
 	public static void joinTwoArrayList() {
 	}
 
-	public static void cloneArrayListToAnotherArrayList() {
+	public static void cloneArrayListToAnotherArrayList() throws CloneNotSupportedException {
+
+
+		List<Pessoa> pessoas5 = new ArrayList<>();
+		pessoas5.add(new Pessoa("Lindomar", LocalDate.of(1973, 1, 1)));
+		pessoas5.add(new Pessoa("Alonso", LocalDate.of(1989, 9, 1)));
+		pessoas5.add(new Pessoa("Jamerson", LocalDate.of(1981, 1, 2)));
+
+
+		List<Pessoa> pessoas6 = new ArrayList<>();
+		pessoas6.add(new Pessoa("Afonso", LocalDate.of(1973, 1, 1)));
+		pessoas6.add(new Pessoa("Eugenio", LocalDate.of(1989, 9, 1)));
+		pessoas6.add(new Pessoa("Leandro", LocalDate.of(1981, 1, 2)));
+
+		for (Pessoa pessoa : pessoas6) {
+			Pessoa clonePessoa = (Pessoa)pessoa.clone();
+			pessoas5.add(clonePessoa);
+		}
+
+
+		
+		
+		List<Pessoa> pessoas2 = new ArrayList<>();
+		pessoas2.add(new Pessoa("Alonso", LocalDate.of(1989, 9, 1)));
+		pessoas2.add(new Pessoa("Jamerson", LocalDate.of(1981, 1, 2)));
+		pessoas2.add(new Pessoa("Lindomar", LocalDate.of(1973, 1, 1)));
 	}
 
 	public static void makeArrayListEmpty() {
@@ -130,15 +157,58 @@ public class Outros {
 	}
 
 	public static void checkWhetherArrayListIsEmptyOrNot() {
+		ArrayList<String> strings = new ArrayList<String>(200);
+		boolean vazia = strings.isEmpty();
+
 	}
 
 	public static void trimTheSizeOfArrayList() {
+
+
+		ArrayList<String> strings = new ArrayList<String>(200);
+
+		strings.add("a");
+		strings.add("b");
+		strings.add("c");
+		strings.add("d");
+		strings.add(null);
+		strings.add(null);
+		strings.add(null);
+
+
+		for (String string : strings) {
+			System.out.println(string);
+		}
+
+		System.out.println("============================");
+
+		strings.trimToSize();
+
+		for (String string : strings) {
+			System.out.println(string);
+		}
 	}
 
 	public static void replaceTheValueOfExistingElementInArrayList() {
+
+		ArrayList<String> strings = new ArrayList<String>(200);
+
+		strings.add("a");
+		strings.add("b");
+		strings.add("c");
+		strings.add("d");
+		strings.add("b");
+
+		strings.set(2, "z");
+
+		Collections.replaceAll(strings, "b", "z");
 	}
 
 	public static void increaseSizeOfArrayList(){
+
+		ArrayList<String> strings = new ArrayList<String>(200);
+
+		strings.ensureCapacity(300);
 
 	}
 

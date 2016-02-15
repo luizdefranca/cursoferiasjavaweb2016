@@ -2,7 +2,7 @@ package br.com.qualiti.colecoes.list.arraylist.ordenacao;
 
 import java.time.LocalDate;
 
-public class Pessoa implements Comparable<Pessoa> {
+public class Pessoa implements Comparable<Pessoa>, Cloneable {
 
 	private String nome;
 	private LocalDate dataNascimento;
@@ -52,6 +52,8 @@ public class Pessoa implements Comparable<Pessoa> {
 		return getNome() + "/"+getDataNascimento();
 	}
 
+
+
 	@Override
 	public boolean equals(Object obj) {
 
@@ -68,5 +70,10 @@ public class Pessoa implements Comparable<Pessoa> {
 
 //		return nome.equals(outra.nome) &&
 //			dataNascimento.equals(outra.dataNascimento);
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return new Pessoa(nome, dataNascimento);
 	}
 }
