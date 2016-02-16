@@ -1,0 +1,39 @@
+data :
+([0-2][0-9]|3[0-1])(\/)(0[1-9]|1[0-2])(\/)(\d{1,4})
+
+horário
+([0-1][0-9]|2[0-3])(:[0-5][0-9])
+
+número IP
+nome de pessoa
+endereço de e-mail
+endereço de Internet
+(http)(s)?(:\/\/)([\w\-]+\.?\/?)+((\?|&)[\w;]*=?[\w;]*)* -> 1488
+
+(http)(s)?(:\/\/)([^"'])+ -> 1483
+(http[^"']+) -> 1485
+
+nome de usuário e senha
+declaração de uma função()
+dados na coluna N de um texto
+dados que estão entre <tags></tags>
+
+(?<=>)([\w\s\(\)="'/\*\{\}\[\];\.\|,\-&]+)(?=</)
+
+negativo para o seguinte caso
+<a href="http://www1.folha.uol.com.br/equilibrioesaude/?cmpid=menulate">Equil&iacute;brio e Sa&uacute;de
+<span class="arrow-left"></span>
+</a>
+
+ab
+
+[^a][b]
+
+abc
+
+[^a][^b][c]
+
+
+campos específicos de um texto tabulado
+CPF
+dados que estão apenas no começo ou no fim da linha
