@@ -20,9 +20,9 @@ public class FileWriterExemplo {
 		FileWriter fileWriter = new FileWriter(file);
 
 		//ESCRITA
-		fileWriter.write("Teste");
+		fileWriter.write("miguel");
 		fileWriter.write("\n");
-		fileWriter.write("Teste2");
+		fileWriter.write("angelo");
 
 		fileWriter.flush();
 
