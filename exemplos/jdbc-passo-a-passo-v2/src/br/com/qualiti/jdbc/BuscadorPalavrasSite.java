@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import br.com.qualiti.jdbc.modelo.LinkAchado;
+
 public class BuscadorPalavrasSite {
 
 	private static ConfiguracoesBanco configuracoesBanco;
@@ -37,25 +39,30 @@ public class BuscadorPalavrasSite {
 		Pattern patternFiltro = Pattern.compile(getValorConfig("expressao.regular.filtro")); //$NON-NLS-1$
 		Matcher matcherFiltro = null;
 
-		String stringCapturada = null;
+		String urlCapturada = null;
 
-		List<String> linksPositivos = new ArrayList<>();
+		/**/List<LinkAchado> linksPositivos = new ArrayList<>();
 
 		while(matcher.find()){
 
-			stringCapturada = matcher.group();
+			urlCapturada = matcher.group();
 
-			matcherFiltro = patternFiltro.matcher(stringCapturada);
+			matcherFiltro = patternFiltro.matcher(urlCapturada);
 
-			System.out.println(stringCapturada);
 
 			if(matcherFiltro.find()){
-				linksPositivos.add(stringCapturada);
+
+				System.out.println(urlCapturada);
+				/* + */LinkAchado linkAchado =
+						new LinkAchado(urlCapturada);
+
+				/**/linksPositivos.add(linkAchado);
 			}
 		}
 
-		Path caminhoArquivoLinksPositivos = Paths.get(getValorConfig("arquivo.caminho")); //$NON-NLS-1$
-		Files.write(caminhoArquivoLinksPositivos, linksPositivos);
+		/**/DataAccessObject dao = new DataAccessObject();
+		/**/dao.insereUrlsAchadas(linksPositivos);
+
 	}
 
 

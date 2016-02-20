@@ -1,12 +1,17 @@
 package br.com.qualiti.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.qualiti.jdbc.modelo.ConfiguracaoPropriedade;
+import br.com.qualiti.jdbc.modelo.LinkAchado;
 
 public class DataAccessObject {
 
@@ -14,10 +19,10 @@ public class DataAccessObject {
 
 	public DataAccessObject() throws SQLException, ClassNotFoundException {
 
-		String driverClassName = Configuracao.getString("jdbc.default.driverClassName");
-		String url = Configuracao.getString("jdbc.default.url");
-		String user = Configuracao.getString("jdbc.default.username");
-		String password = Configuracao.getString("jdbc.default.password");
+		String driverClassName = ConfiguracaoArquivo.getString("jdbc.default.driverClassName");
+		String url = ConfiguracaoArquivo.getString("jdbc.default.url");
+		String user = ConfiguracaoArquivo.getString("jdbc.default.username");
+		String password = ConfiguracaoArquivo.getString("jdbc.default.password");
 
 		//ESTA LINHA É SÓ PARA MIGUEL ANGELO - VC NAO PRECISA USAR!
 		password = null;
@@ -27,11 +32,37 @@ public class DataAccessObject {
 		connection = DriverManager.getConnection(url, user, password);
 	}
 
-	public Map<String, String> consultaConfiguracoes() throws SQLException{
+	public void insereUrlsAchadas(List<LinkAchado> linksAchados) throws SQLException{
 
-		Map<String, String> configuracoes = new HashMap<>();
+		connection.setAutoCommit(false);
 
-		String sql = "SELECT chave, valor "
+		String sql = "insert into "
+				+ "buscadorpalavras.links_achados(url,data) "
+				+ "values (?,?)";
+
+		//STATEMENT - COMANDO SQL
+
+		PreparedStatement comandoSQL = connection.prepareStatement(sql);
+
+		for (LinkAchado linkAchado : linksAchados) {
+			comandoSQL.setString(1, linkAchado.getUrl());
+
+			//TODO SUBSTITUIR POR linkAchado.getData()
+			comandoSQL.setDate(
+					2, new Date(System.currentTimeMillis()));
+
+			comandoSQL.executeUpdate();
+		}
+
+		connection.commit();
+
+	}
+
+	public List<ConfiguracaoPropriedade> consultaConfiguracoes() throws SQLException{
+
+		List<ConfiguracaoPropriedade> configuracoesPropriedade = new ArrayList<>();
+
+		String sql = "SELECT id, chave, valor "
 				+ "FROM buscadorpalavras.configuracao";
 
 		//STATEMENT - COMANDO SQL
@@ -45,16 +76,22 @@ public class DataAccessObject {
 		//E USANDO-OS PARA PREENCHER O MAP
 
 		while(resultados.next()){
+			Long id = resultados.getLong("id");
 			String chave = resultados.getString("chave");
 			String valor = resultados.getString("valor");
 
-			configuracoes.put(chave, valor);
+			ConfiguracaoPropriedade propriedade = new ConfiguracaoPropriedade();
+			propriedade.setId(id);
+			propriedade.setChave(chave);
+			propriedade.setValor(valor);
+
+			configuracoesPropriedade.add(propriedade);
 		}
 
 		resultados.close();
 		comandoSQL.close();
 
-		return configuracoes;
+		return configuracoesPropriedade;
 
 	}
 }
