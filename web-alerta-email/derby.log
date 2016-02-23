@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Feb 23 17:25:12 BRT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0153-0fce-9f5c-00000e76b658 
+on database directory /Users/miguelangelo/Liferay/ide/mars/eclipse/workspace-aula/web-alerta-email/buscadorpalavras  with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/Users/miguelangelo/Liferay/ide/mars/eclipse/workspace-aula/web-alerta-email/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_40-b27
+user.dir=/Users/miguelangelo/Liferay/ide/mars/eclipse/workspace-aula/web-alerta-email
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.10.5
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

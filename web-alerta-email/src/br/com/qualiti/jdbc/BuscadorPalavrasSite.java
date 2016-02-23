@@ -87,6 +87,8 @@ public class BuscadorPalavrasSite {
 			textoLinksAchados.append("\n");
 		}
 
+		SendEmail.send(textoLinksAchados.toString());
+
 	}
 
 
