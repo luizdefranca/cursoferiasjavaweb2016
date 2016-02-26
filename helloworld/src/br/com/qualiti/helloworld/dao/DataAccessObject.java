@@ -2,6 +2,7 @@ package br.com.qualiti.helloworld.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import br.com.qualiti.helloworld.configuracao.ConfiguracaoArquivo;
@@ -23,8 +24,18 @@ public class DataAccessObject {
 		connection = DriverManager.getConnection(url, user, password);
 	}
 
-	public void inserirMensagem(Mensagem mensagem){
+	public void inserirMensagem(Mensagem mensagem) throws SQLException{
 
 		//CHAMAR O BANCO DE DADOS PARA INSERIR
+		String sqlInsert = "insert into mensagens.mensagem(texto) values(?)";
+		PreparedStatement comando = connection.prepareStatement(sqlInsert);
+
+		comando.setString(1, mensagem.getTexto());
+
+		comando.executeUpdate();
+
+		comando.close();
+
+
 	}
 }
