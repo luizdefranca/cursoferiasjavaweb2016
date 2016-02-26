@@ -11,7 +11,7 @@
 <form action="hello" method="POST">
 	Mensagem: <input name="mensagem" type="text" value=""/>
 	<br>
-	<input type="submit" name="Enviar"/>
+	<input type="submit" name="Asdf"/>
 </form>
 </body>
 </html>

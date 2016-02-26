@@ -1,6 +1,7 @@
 package br.com.qualiti.helloworld;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.com.qualiti.helloworld.dao.DataAccessObject;
+import br.com.qualiti.helloworld.modelo.Mensagem;
 
 /**
  * Servlet implementation class HelloWorldServlet
@@ -29,18 +33,45 @@ public class HelloWorldServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//RECUPERA PARAMETRO DA URL
-		String mensagem  = request.getParameter("mensagem");
+		String texto  = request.getParameter("mensagem");
 
 		//DIPONIBILIZA UMA VARIÁVEL NA MEMÓRIA PARA O PROXIMA PÁGINA
-		request.setAttribute("mensagemParaExibicao", mensagem);
+		request.setAttribute("mensagemParaExibicao", texto);
 
+		//CRIAR UM OBJETO MENSAGEM(ID, TEXTO)
+		Mensagem mensagem = new Mensagem();
+
+		//SETAR A VARIÁVEL texto NO OBJETO mensagem.setTexto(texto)
+		mensagem.setTexto(texto);
+
+		//CHAMAR O DATA ACCESS OBJECT
+		//para salvar o objeto mensagem
+		//no banco
+
+		try {
+			DataAccessObject dataAccessObject = new DataAccessObject();
+			dataAccessObject.inserirMensagem(mensagem);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new ServletException(e);
+		}
+
+
+		//Redirecionar para a próxima página
+		String caminhoPagina = "/mensagem.jsp";
+
+		forward(request, response, caminhoPagina);
+	}
+
+	private void forward(HttpServletRequest request,
+			HttpServletResponse response, String caminhoPagina)
+			throws ServletException, IOException {
 		//CRIO UM ENDERECADOR QUE APONTA PARA O PROXIMO DESTINO
 		RequestDispatcher requestDispatcher =
-			request.getRequestDispatcher("/mensagem.jsp");
+			request.getRequestDispatcher(caminhoPagina);
 
 		//ENCAMINHA PARA O PROXIMO DESTINO
 		requestDispatcher.forward(request, response);
-
 	}
 
 	/**
