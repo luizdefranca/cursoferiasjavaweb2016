@@ -2,6 +2,7 @@ package br.com.qualiti.helloworld;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,17 +14,18 @@ import br.com.qualiti.helloworld.dao.DataAccessObject;
 import br.com.qualiti.helloworld.modelo.Mensagem;
 
 /**
- * Servlet implementation class HelloWorldServlet
+ * Servlet implementation class ListaMensagensServlet
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/hello" })
-public class HelloWorldServlet extends QualitiServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/listar" })
+public class ListaMensagensServlet extends QualitiServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloWorldServlet() {
+    public ListaMensagensServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,35 +33,24 @@ public class HelloWorldServlet extends QualitiServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//RECUPERA PARAMETRO DA URL
-		String texto  = request.getParameter("mensagem");
-
-		//DIPONIBILIZA UMA VARIÁVEL NA MEMÓRIA PARA O PROXIMA PÁGINA
-		request.setAttribute("mensagemParaExibicao", texto);
-
-		//CRIAR UM OBJETO MENSAGEM(ID, TEXTO)
-		Mensagem mensagem = new Mensagem();
-
-		//SETAR A VARIÁVEL texto NO OBJETO mensagem.setTexto(texto)
-		mensagem.setTexto(texto);
-
-		//CHAMAR O DATA ACCESS OBJECT
-		//para salvar o objeto mensagem
-		//no banco
-
 		try {
+			//INSTANCIAR O DAO
 			DataAccessObject dataAccessObject = new DataAccessObject();
-			dataAccessObject.inserirMensagem(mensagem);
+			//CHAMAR O MÉTODO DE LISTAR MENSAGENS
+			List<Mensagem> listaDeMensagens = dataAccessObject.listarMensagens();
+
+			//COLOCAR A LISTA DE MENSAGENS NO REQUEST(NA MEMÓRIA)
+			request.setAttribute("listaDeMensagens", listaDeMensagens);
+
+			//REPASSAR PARA A PÁGINA DE LISTAGEM
+			forward(request, response,
+					"/listaMensagens.jsp");
+
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			throw new ServletException(e);
 		}
 
-
-		//Redirecionar para a próxima página
-		String caminhoPagina = "/mensagem.jsp";
-
-		forward(request, response, caminhoPagina);
 	}
 
 	/**

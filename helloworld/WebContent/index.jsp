@@ -11,7 +11,11 @@
 <form action="hello" method="POST">
 	Mensagem: <input name="mensagem" type="text" value=""/>
 	<br>
-	<input type="submit" name="Asdf"/>
+	<input type="submit" value="Gravar"/>
+</form>
+
+<form action="listar" method="POST">
+	<input type="submit" value="Exibir Mensagens"/>
 </form>
 </body>
 </html>
