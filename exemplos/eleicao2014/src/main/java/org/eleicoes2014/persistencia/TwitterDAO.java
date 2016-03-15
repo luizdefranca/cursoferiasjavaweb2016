@@ -53,7 +53,68 @@ public class TwitterDAO {
 	}
 	
 	
-	public void insert (Tweet tweet) {}
+	public void insert (Tweet tweet) throws SQLException {
+	
+		Connection conn = null;
+		try {
+			conn = getConnection();
+	
+			conn.setAutoCommit(false);
+			
+			StringBuilder sql = new StringBuilder();
+			
+			
+			sql.append("INSERT INTO twitter.tweets");
+			sql.append("(");
+			sql.append("user,");
+			sql.append("createdAt,");
+			sql.append("text,");
+			sql.append("source,");
+			sql.append("isTruncated,");
+			sql.append("inReplyToStatusId,");
+			sql.append("inReplyToUserId,");
+			sql.append("isFavorited,");
+			sql.append("inReplyToScreenName)");
+			sql.append(" VALUES ");
+			sql.append("(");
+			sql.append("?,");
+			sql.append("?,");
+			sql.append("?,");
+			sql.append("?,");
+			sql.append("?,");
+			sql.append("?,");
+			sql.append("?,");
+			sql.append("?,");
+			sql.append("?)");		
+			
+			PreparedStatement pstmt = 
+				conn.prepareStatement(sql.toString());
+			
+			/*("user,");*/pstmt.setString(1, tweet.getUser());
+			/*("createdAt,");*/pstmt.setDate(2, new java.sql.Date(tweet.getCreatedAt().getTime()));
+			/*("text,");*/pstmt.setString(3, tweet.getText());
+			/*("source,");*/pstmt.setString(4, tweet.getSource());
+			/*("isTruncated,");*/pstmt.setBoolean(5, tweet.isTruncated());
+			/*("inReplyToStatusId,");*/pstmt.setLong(6, tweet.getInReplyToStatusId());
+			/*("inReplyToUserId,");*/pstmt.setLong(7, tweet.getInReplyToUserId());
+			/*("isFavorited,");*/pstmt.setBoolean(8, tweet.isFavorited());
+			/*("inReplyToScreenName)");*/pstmt.setString(9, tweet.getInReplyToScreenName());			
+						
+			int executeUpdate = pstmt.executeUpdate();
+			
+			System.out.println(executeUpdate);
+
+			conn.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
+	
 	public void update (Tweet tweet) {}
 	public void delete (Tweet tweet) {}
 	public List<Tweet> search (Tweet tweet) { return null;}	

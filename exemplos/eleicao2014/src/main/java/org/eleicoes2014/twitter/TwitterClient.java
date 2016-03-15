@@ -2,6 +2,8 @@ package org.eleicoes2014.twitter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.eleicoes2014.config.Configuration;
 
@@ -18,7 +20,7 @@ import twitter4j.conf.ConfigurationBuilder;
  https://apps.twitter.com/app/6292053
 
  Application settings
- Your application's API keys are used to authenticate requests 
+ Your application's API keys are used to authenticate requests
  to the Twitter Platform.
  Access level	 Read-only (modify app permissions)
  API key	 436yfREpwRhs9eoqjjr59VPLt (manage API keys)
@@ -36,59 +38,54 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TwitterClient {
 
 	private static  Configuration config;
-	
-	private Twitter twitter;
-	private String user;
-	private String password;
 
-	public TwitterClient(String user, String password) throws TwitterException, IOException {
+	private Twitter twitter;
+
+	public TwitterClient() throws TwitterException, IOException {
 
 		config = Configuration.getInstance();
-		
-		this.user = config.getUser();
-		this.password = config.getPassword();
+
 		login();
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public String getUser() {
-
-		return user;
 	}
 
 	public boolean isAuthenticated() throws TwitterException {
 		User user2 = twitter.verifyCredentials();
-		
+
 		return user2 != null;
 	}
 
 	public List<Status> listTweets() throws TwitterException {
-		
+
 		return twitter.getUserTimeline();
 	}
 
 	public List<Status> listTweets(String usuario) throws TwitterException {
-		
+
 		return twitter.getUserTimeline(usuario);
 	}
-	
+
 	public List<Status> listTweets(String... filters) throws TwitterException {
-		
+
 		StringBuilder stringQuery = new StringBuilder();
-		
+
 		for (String filter : filters) {
 			stringQuery.append(filter);
 			stringQuery.append(" ");
 		}
-		
+
 	    Query query = new Query(stringQuery.toString());
 	    QueryResult result = twitter.search(query);
-		
+
 		return result.getTweets();
-	}	
+	}
+
+	public List<Status> listTweets(Supplier<String> supplier) throws TwitterException {
+
+		Query query = new Query(supplier.get());
+		QueryResult result = twitter.search(query);
+
+		return result.getTweets();
+	}
 
 	public void login() throws TwitterException {
 
@@ -101,14 +98,4 @@ public class TwitterClient {
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		twitter = tf.getInstance();
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-
 }

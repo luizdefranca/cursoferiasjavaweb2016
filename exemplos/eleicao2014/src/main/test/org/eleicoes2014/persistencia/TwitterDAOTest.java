@@ -2,6 +2,9 @@ package org.eleicoes2014.persistencia;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.eleicoes2014.modelo.Tweet;
 import org.junit.Test;
 
@@ -21,7 +24,19 @@ public class TwitterDAOTest {
 	}
 
 	private Tweet criarTweetDadosFicticios() {
-		return new Tweet();
+		Tweet tweet = new Tweet();
+		
+		tweet.setCreatedAt(new Date());
+		tweet.setFavorited(true);
+		tweet.setInReplyToScreenName("Miguel Angelo");
+		tweet.setInReplyToStatusId(3L);
+		tweet.setInReplyToUserId(2L);
+		tweet.setSource("asdasdasdasdasdasdasdasdasdasdasdasdas");
+		tweet.setText("asdasdasdasdasdasdasdasdasd");
+		tweet.setTruncated(false);
+		tweet.setUser("@lucianohuk");
+		
+		return tweet;
 	}
 
 	@Test
