@@ -1,0 +1,10 @@
+{
+    "jhipsterApp": {
+        "SexoEnum" : {
+            "null": "",
+            "M": "M",
+            "F": "F",
+            "T": "T"
+        }
+    }
+}

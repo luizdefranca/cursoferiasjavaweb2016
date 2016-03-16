@@ -1,0 +1,24 @@
+{
+    "jhipsterApp": {
+        "endereco" : {
+            "home": {
+                "title": "Enderecos",
+                "createLabel": "Créer un nouveau Endereco",
+                "createOrEditLabel": "Créer ou éditer un Endereco",
+                "search": "Search for Endereco"
+            },
+            "created": "Un nouveau Endereco a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Endereco avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Endereco avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Endereco {{ id }} ?"
+            },
+            "detail": {
+                "title": "Endereco"
+            },
+            "logradouro": "Logradouro",
+            "pessoa": "Pessoa"
+        }
+    }
+}
+

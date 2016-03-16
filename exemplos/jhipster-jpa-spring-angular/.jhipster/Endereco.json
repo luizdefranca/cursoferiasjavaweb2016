@@ -1,0 +1,22 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "pessoa",
+            "otherEntityName": "pessoa",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "nome"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "logradouro",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160308001813",
+    "dto": "no",
+    "service": "serviceClass",
+    "pagination": "pager"
+}

@@ -1,0 +1,25 @@
+{
+    "jhipsterApp": {
+        "pessoa" : {
+            "home": {
+                "title": "Pessoas",
+                "createLabel": "Créer un nouveau Pessoa",
+                "createOrEditLabel": "Créer ou éditer un Pessoa",
+                "search": "Search for Pessoa"
+            },
+            "created": "Un nouveau Pessoa a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Pessoa avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Pessoa avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Pessoa {{ id }} ?"
+            },
+            "detail": {
+                "title": "Pessoa"
+            },
+            "nome": "Nome",
+            "sexo": "Sexo",
+            "endereco": "Endereco"
+        }
+    }
+}
+

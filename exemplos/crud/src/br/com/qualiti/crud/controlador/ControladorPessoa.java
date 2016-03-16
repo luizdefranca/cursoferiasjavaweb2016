@@ -15,6 +15,7 @@ public class ControladorPessoa {
 
 			String classeDAO = Configuracao.getString("classe.dao");
 
+
 			/*
 "br.com.qualiti.crud.dao.PessoaDAOImpl"	Class<PessoaDAOImpl>
 			 */

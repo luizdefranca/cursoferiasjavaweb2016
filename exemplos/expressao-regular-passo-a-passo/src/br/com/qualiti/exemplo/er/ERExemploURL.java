@@ -11,8 +11,10 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ERExemploURL {
 
@@ -21,7 +23,29 @@ public class ERExemploURL {
 		String textoParaTeste = getConteudoURL("http://www.folha.com");
 
 		writeToFile("/Users/miguelangelo/conteudo.html", textoParaTeste);
+		String expressaoRegular =
+				"(http)(s)?(://)([\\w\\-]+\\.?\\/?)+((\\?|&)[\\w;]*=?[\\w;]*)*";
 
+			Pattern pattern = Pattern.compile(expressaoRegular);
+
+		//=========================================
+		Path pathLinksFolha = Paths.get("/Users/miguelangelo/conteudo.html");
+
+		Files.readAllLines(pathLinksFolha)
+			.stream()
+			.filter(s -> pattern.matcher(s).find())
+			.map (s -> {
+
+				Matcher matcher = pattern.matcher(s);
+				matcher.find();
+				return matcher.group();
+			})
+			.filter(s -> s.toLowerCase().contains("lula"))
+			//.map(s -> s.toUpperCase())
+			.forEach(System.out::println);
+		//====================================================
+
+		/*
 		String expressaoRegular =
 			"(http)(s)?(://)([\\w\\-]+\\.?\\/?)+((\\?|&)[\\w;]*=?[\\w;]*)*";
 
@@ -33,6 +57,7 @@ public class ERExemploURL {
 			stringCapturada = matcher.group();
 			System.out.println(stringCapturada);
 		}
+		*/
 	}
 
 	private static void writeToFile(String caminhoArquivo, String conteudo) throws IOException{
@@ -69,6 +94,9 @@ public class ERExemploURL {
 
 		while(bufferedReader.ready()){
 			stringBuilder.append(bufferedReader.readLine());
+			//COLOQUEM A LINHA ABAIXO - MÉTODO getConteudoURL
+			stringBuilder.append("\n");
+			//================================
 		}
 
 		conteudoUrl = stringBuilder.toString();

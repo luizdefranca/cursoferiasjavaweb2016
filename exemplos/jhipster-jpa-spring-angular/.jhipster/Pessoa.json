@@ -1,0 +1,29 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "endereco",
+            "otherEntityName": "endereco",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "pessoa"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "sexo",
+            "fieldType": "SexoEnum",
+            "fieldValues": "M,F,T"
+        }
+    ],
+    "changelogDate": "20160308001244",
+    "dto": "no",
+    "service": "serviceClass",
+    "pagination": "pagination"
+}
